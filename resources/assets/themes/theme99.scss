@@ -1,0 +1,142 @@
+// engel-erp
+@import 'light';
+
+
+$erp-logo-bg: rgb(16, 41, 115);
+$erp-col-heading: rgb(90, 206, 255);
+$erp-list-body: rgb(239, 247, 255);
+$erp-key-col: rgb(156, 206, 239);
+$erp-hierarchy-heading: rgb(255, 198, 107);
+$erp-hierarchy-info: rgb(255, 222, 198);
+$erp-background: rgb(148, 180, 196);
+$erp-menu-bg: rgb(189, 189, 189);
+$erp-content-bg: rgb(220, 212, 196);
+$erp-button-border: rgb(180, 180, 164);
+
+$erp-input-bg: white;
+$erp-input-blocked-bg: rgb(204, 204, 188);
+$erp-input-active-bg: rgb(255, 247, 156);
+
+$body-bg: $erp-content-bg;
+
+$brand-primary: rgb(0, 0, 0);
+$primary: rgb(0, 0, 0);
+$brand-success: rgb(49, 156, 0);
+$success: rgb(49, 156, 0);
+$brand-info: rgb(0, 0, 255);
+$info: rgb(0, 0, 255);
+$brand-warning: rgb(255, 206, 49);
+$warning: rgb(255, 206, 49);
+$brand-danger: rgb(255, 0, 0);
+$danger: rgb(255, 0, 0);
+
+$link-color: $brand-primary;
+$border-color: $erp-button-border;
+
+$state-success-text: darken($brand-success, 40%);
+$state-success-bg: lighten($brand-success, 40%);
+$state-success-border: $brand-success;
+
+$state-info-text: darken($brand-info, 40%);
+$state-info-bg: lighten($brand-info, 40%);
+$state-info-border: $brand-info;
+
+$state-warning-text: darken($brand-warning, 40%);
+$state-warning-bg: $brand-warning;
+$state-warning-border: darken($brand-warning, 40%);
+
+$state-danger-text: darken($brand-danger, 40%);
+$state-danger-bg: lighten($brand-danger, 40%);
+$state-danger-border: $brand-danger;
+
+$table-bg: $erp-list-body;
+$table-striped-bg: $table-bg;
+
+$input-bg: $erp-input-bg;
+$input-disabled-bg: $erp-input-blocked-bg;
+$input-focus-bg: $erp-input-active-bg;
+$input-border-color: $erp-input-bg;
+
+$border-width: 2px;
+$border-color: $erp-button-border;
+$card-border-color: $border-color;
+
+.badge.bg-warning {
+  color: #000;
+}
+
+@import 'base.scss';
+
+* {
+  border-radius: 0 !important;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  &.bg-primary {
+    color: #fff;
+  }
+}
+
+body {
+  background: $erp-background;
+}
+
+h1 {
+  color: $erp-logo-bg;
+  background-color: white;
+  font-style: italic;
+  //width: 100vw;
+  //position: relative;
+  //left: calc(-50vw + 50%);
+  padding: 0.2rem 1rem 0.2rem 1rem;
+}
+
+.navbar-brand {
+  color: white;
+  margin: -0.5rem 0 -0.5rem -0.8rem;
+  padding: 0.84375rem 3rem 0.84375rem 0.84375rem;
+  //margin-left: calc(var(--bs-gutter-x)*-.5);
+  //padding-left: calc(var(--bs-gutter-x)*.5);
+  //margin-top: calc(var(--bs-navbar-padding-y)*-1 - var(--bs-navbar-brand-padding-y));
+  //padding-top: calc(var(--bs-navbar-padding-y) + var(--bs-navbar-brand-padding-y));
+  //margin-bottom: calc(var(--bs-navbar-padding-y)*-1 - var(--bs-navbar-brand-padding-y));
+  //padding-bottom: calc(var(--bs-navbar-padding-y) + var(--bs-navbar-brand-padding-y));
+  background-image:
+    linear-gradient(-225deg, $erp-logo-bg 0 50%, transparent 50% 100%),
+    linear-gradient($erp-logo-bg 0 100%, $erp-logo-bg);
+  background-size:
+    25% 100%, 75% 100%;
+  background-position:
+    right top, left top;
+  background-repeat: no-repeat;
+}
+
+#content > .container {
+  background: $erp-content-bg;
+}
+
+.navbar-light {
+  background-color: $erp-menu-bg;
+}
+
+.navbar-brand > .icon-icon_angel {
+  background-color: white !important;
+}
+
+.nav-link {
+  color: black;
+}
+
+th {
+  background-color: $erp-col-heading !important;
+}

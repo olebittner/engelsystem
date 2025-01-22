@@ -156,6 +156,11 @@ return [
     // Supported themes
     // To disable a theme in config.php, you can set its value to null
     'themes' => [
+        99 => [
+            'name' => 'ENGEL ERP',
+            'type' => 'light',
+            'navbar_classes' => 'navbar-light',
+        ],
         20 => [
             'name' => 'Engelsystem eh22-light (2025)',
             'type' => 'light',
