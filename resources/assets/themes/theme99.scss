@@ -1,6 +1,6 @@
 // engel-erp
+// any resemblance to actual erp systems is purely coincidental
 @import 'light';
-
 
 $erp-logo-bg: rgb(16, 41, 115);
 $erp-col-heading: rgb(90, 206, 255);
@@ -67,6 +67,7 @@ $card-border-color: $border-color;
 
 @import 'base.scss';
 
+// no fancy round corners
 * {
   border-radius: 0 !important;
 }
@@ -95,22 +96,28 @@ h1 {
   color: $erp-logo-bg;
   background-color: white;
   font-style: italic;
-  //width: 100vw;
-  //position: relative;
-  //left: calc(-50vw + 50%);
-  padding: 0.2rem 1rem 0.2rem 1rem;
+  margin-left: calc(var(--bs-gutter-x) * -0.5);
+  margin-right: calc(var(--bs-gutter-x) * -0.5);
+  padding-left: var(--bs-gutter-x);
+  padding-right: var(--bs-gutter-x);
 }
 
 .navbar-brand {
   color: white;
-  margin: -0.5rem 0 -0.5rem -0.8rem;
-  padding: 0.84375rem 3rem 0.84375rem 0.84375rem;
-  //margin-left: calc(var(--bs-gutter-x)*-.5);
-  //padding-left: calc(var(--bs-gutter-x)*.5);
-  //margin-top: calc(var(--bs-navbar-padding-y)*-1 - var(--bs-navbar-brand-padding-y));
-  //padding-top: calc(var(--bs-navbar-padding-y) + var(--bs-navbar-brand-padding-y));
-  //margin-bottom: calc(var(--bs-navbar-padding-y)*-1 - var(--bs-navbar-brand-padding-y));
-  //padding-bottom: calc(var(--bs-navbar-padding-y) + var(--bs-navbar-brand-padding-y));
+
+  //adjust margin & padding to fill whole corner with background
+  padding:
+    calc(var(--bs-navbar-brand-padding-y) + var(--bs-navbar-padding-y) + var(--bs-border-width) * 0.5)
+    3.5rem
+    calc(var(--bs-navbar-brand-padding-y) + var(--bs-navbar-padding-y) + var(--bs-border-width) * 0.5)
+    calc(var(--bs-gutter-x) * 0.5);
+  margin:
+    calc((var(--bs-navbar-padding-y) + var(--bs-border-width) * 0.5) * -1)
+    0
+    calc((var(--bs-navbar-padding-y) + var(--bs-border-width) * 0.5) * -1)
+    calc(var(--bs-gutter-x) * -0.5);
+
+  //create 45degree background transition for logo
   background-image:
     linear-gradient(-225deg, $erp-logo-bg 0 50%, transparent 50% 100%),
     linear-gradient($erp-logo-bg 0 100%, $erp-logo-bg);
@@ -125,6 +132,10 @@ h1 {
   background: $erp-content-bg;
 }
 
+.card-body {
+  background-color: $erp-content-bg !important;
+}
+
 .navbar-light {
   background-color: $erp-menu-bg;
 }
@@ -134,9 +145,13 @@ h1 {
 }
 
 .nav-link {
-  color: black;
+  color: $link-color;
 }
 
 th {
   background-color: $erp-col-heading !important;
+}
+
+.row {
+  padding-bottom: 0.5rem;
 }
