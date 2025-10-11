@@ -8,14 +8,19 @@ $erp-list-body: rgb(239, 247, 255);
 $erp-key-col: rgb(156, 206, 239);
 $erp-hierarchy-heading: rgb(255, 198, 107);
 $erp-hierarchy-info: rgb(255, 222, 198);
-$erp-background: rgb(148, 180, 196);
+$erp-background: rgb(148, 178, 198);
 $erp-menu-bg: rgb(189, 189, 189);
-$erp-content-bg: rgb(220, 212, 196);
+$erp-content-bg: rgb(222, 215, 198);
 $erp-button-border: rgb(180, 180, 164);
 
 $erp-input-bg: white;
-$erp-input-blocked-bg: rgb(204, 204, 188);
+$erp-input-blocked-bg: rgb(206, 203, 189);
 $erp-input-active-bg: rgb(255, 247, 156);
+
+$erp-table-row-bg: $erp-content-bg;
+$erp-table-row-bg-selected: rgb(198, 158, 74);
+$erp-table-border: rgb(153, 149, 138);
+$erp-table-header-bg: rgb(227, 225, 219);
 
 $body-bg: $erp-content-bg;
 
@@ -23,8 +28,8 @@ $brand-primary: rgb(0, 0, 0);
 $primary: rgb(0, 0, 0);
 $brand-success: rgb(49, 156, 0);
 $success: rgb(49, 156, 0);
-$brand-info: rgb(0, 0, 255);
-$info: rgb(0, 0, 255);
+$brand-info: $erp-logo-bg;
+$info: $erp-logo-bg;
 $brand-warning: rgb(255, 206, 49);
 $warning: rgb(255, 206, 49);
 $brand-danger: rgb(255, 0, 0);
@@ -49,8 +54,9 @@ $state-danger-text: darken($brand-danger, 40%);
 $state-danger-bg: lighten($brand-danger, 40%);
 $state-danger-border: $brand-danger;
 
-$table-bg: $erp-list-body;
+$table-bg: $erp-table-row-bg;
 $table-striped-bg: $table-bg;
+$table-border-color: $erp-table-border;
 
 $input-bg: $erp-input-bg;
 $input-disabled-bg: $erp-input-blocked-bg;
@@ -60,6 +66,10 @@ $input-border-color: $erp-input-bg;
 $border-width: 2px;
 $border-color: $erp-button-border;
 $card-border-color: $border-color;
+
+$dropdown-bg: $erp-table-row-bg;
+$dropdown-link-active-bg: $erp-table-row-bg-selected;
+$dropdown-link-active-color: black;
 
 .badge.bg-warning {
   color: #000;
@@ -88,8 +98,24 @@ h6,
   }
 }
 
+.bg-primary,
+.bg-secondary,
+.bg-success,
+.bg-info {
+  color: white;
+}
+
+.bg-body {
+  color: black;
+}
+
+.card-footer.bg-white {
+  background-color: $erp-content-bg !important;
+}
+
 body {
   background: $erp-background;
+  padding-top: 58px;
 }
 
 h1 {
@@ -100,36 +126,42 @@ h1 {
   margin-right: calc(var(--bs-gutter-x) * -0.5);
   padding-left: var(--bs-gutter-x);
   padding-right: var(--bs-gutter-x);
+  padding-bottom: 2px;
 }
 
 .navbar-brand {
   color: white;
 
   //adjust margin & padding to fill whole corner with background
-  padding:
-    calc(var(--bs-navbar-brand-padding-y) + var(--bs-navbar-padding-y) + var(--bs-border-width) * 0.5)
-    3.5rem
+  padding: calc(var(--bs-navbar-brand-padding-y) + var(--bs-navbar-padding-y) + var(--bs-border-width) * 0.5) 3.5rem
     calc(var(--bs-navbar-brand-padding-y) + var(--bs-navbar-padding-y) + var(--bs-border-width) * 0.5)
     calc(var(--bs-gutter-x) * 0.5);
-  margin:
-    calc((var(--bs-navbar-padding-y) + var(--bs-border-width) * 0.5) * -1)
-    0
-    calc((var(--bs-navbar-padding-y) + var(--bs-border-width) * 0.5) * -1)
-    calc(var(--bs-gutter-x) * -0.5);
+  margin: calc((var(--bs-navbar-padding-y) + var(--bs-border-width) * 0.5) * -1) 0
+    calc((var(--bs-navbar-padding-y) + var(--bs-border-width) * 0.5) * -1) calc(var(--bs-gutter-x) * -0.5);
 
   //create 45degree background transition for logo
-  background-image:
-    linear-gradient(-225deg, $erp-logo-bg 0 50%, transparent 50% 100%),
+  background-image: linear-gradient(-225deg, $erp-logo-bg 0 50%, transparent 50% 100%),
     linear-gradient($erp-logo-bg 0 100%, $erp-logo-bg);
-  background-size:
-    25% 100%, 75% 100%;
-  background-position:
-    right top, left top;
+  background-size: 25% 100%, 75% 100%;
+  background-position: right top, left top;
   background-repeat: no-repeat;
+}
+
+.nav-item {
+  border-right: white;
+  border-right-width: 1px;
+  border-right-style: solid;
 }
 
 #content > .container {
   background: $erp-content-bg;
+  padding-bottom: 1px;
+}
+
+//apply background for "fullscreen" views like /user-shifts
+#content:not(:has(> .container)) {
+  background: $erp-content-bg;
+  padding-bottom: 1px;
 }
 
 .card-body {
@@ -148,10 +180,108 @@ h1 {
   color: $link-color;
 }
 
-th {
-  background-color: $erp-col-heading !important;
+table {
+  border-width: 2px !important;
+  border-color: $erp-table-border;
+  border-style: solid;
+}
+
+th,
+.header {
+  background-image: linear-gradient(
+    180deg,
+    white 0%,
+    $erp-table-header-bg 40%,
+    $erp-table-header-bg 75%,
+    rgba(196, 192, 181, 1) 100%
+  ) !important;
+}
+
+td,
+th,
+thead {
+  border-left-width: 2px !important;
+  border-right-width: 2px !important;
+  border-style: solid !important;
+  border-color: $erp-table-border !important;
+}
+
+.col,
+.col-sm-3,
+.col-sm-6,
+.col-md-4 {
+  border-width: 2px !important;
+  border-color: $erp-table-border;
+  border-style: solid;
+  margin: calc(var(--bs-gutter-x) * 0.5);
+}
+
+.col-sm-3 {
+  width: calc(25% - var(--bs-gutter-x));
+}
+
+.col-sm-6 {
+  width: calc(50% - var(--bs-gutter-x));
+}
+
+.col-md-4 {
+  width: calc(33.33333333% - var(--bs-gutter-x));
 }
 
 .row {
-  padding-bottom: 0.5rem;
+}
+
+.col > h4,
+.col-sm-3 > h4,
+.col-sm-6 > h2,
+.col-md-4 > h3 {
+  width: fit-content;
+
+  margin-left: calc(var(--bs-gutter-x) * -0.5);
+  padding-left: calc(var(--bs-gutter-x) * 0.5);
+
+  // experiment: 45degree angle border on the right
+  //padding-right: 3.5rem; /* Matches the angled border width */
+  //padding-bottom: 2px; /* Matches the bottom border height */
+  //background:
+  //  /* Bottom border */
+  //  linear-gradient(to right, $erp-table-border, $erp-table-border) 0 100% / calc(80% + 2px) 2px,
+  //    /* Angled right border at the right edge */
+  //  linear-gradient(135deg,
+  //    transparent 0%,
+  //    transparent calc(50% - 1px),
+  //    $erp-table-border calc(50% - 1px),
+  //    $erp-table-border calc(50% + 1px),
+  //    transparent calc(50% + 1px),
+  //    transparent 100%
+  //  ) 100% 0 / calc(20% - 2px) 100%,
+  //    /* Main background */
+  //  transparent;
+  //background-repeat: no-repeat;
+
+  //cheap alternative
+  border-bottom: $erp-table-border;
+  border-bottom-width: 2px;
+  border-bottom-style: solid;
+  border-right: $erp-table-border;
+  border-right-width: 2px;
+  border-right-style: solid;
+  padding-bottom: 2px;
+  padding-right: calc(var(--bs-gutter-x) * 0.5);
+}
+
+.shift-calendar {
+  border-width: 2px;
+  border-style: solid;
+  border-color: $erp-table-border;
+  padding: 0;
+}
+
+.choices__list--dropdown {
+  background-color: $dropdown-bg !important;
+}
+
+.choices__item.is-selected {
+  background-color: $erp-table-row-bg-selected !important;
+  color: black !important;
 }
