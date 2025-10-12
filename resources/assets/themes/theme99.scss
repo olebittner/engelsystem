@@ -2,6 +2,7 @@
 // any resemblance to actual erp systems is purely coincidental
 @import 'light';
 
+//<editor-fold desc="Colors">
 $erp-logo-bg: rgb(16, 41, 115);
 $erp-col-heading: rgb(90, 206, 255);
 $erp-list-body: rgb(239, 247, 255);
@@ -21,20 +22,23 @@ $erp-table-row-bg: $erp-content-bg;
 $erp-table-row-bg-selected: rgb(198, 158, 74);
 $erp-table-border: rgb(153, 149, 138);
 $erp-table-header-bg: rgb(227, 225, 219);
+$erp-table-input: rgb(255, 255, 239);
 
 $body-bg: $erp-content-bg;
 
-//TODO pick red yellow green button colors
 $brand-primary: rgb(0, 0, 0);
 $primary: rgb(0, 0, 0);
-$brand-success: rgb(49, 156, 0);
-$success: rgb(49, 156, 0);
+$secondary: rgb(139 147 167);
+$brand-success: rgb(77, 166, 25);
+$success: $brand-success;
 $brand-info: $erp-logo-bg;
 $info: $erp-logo-bg;
-$brand-warning: rgb(255, 206, 49);
-$warning: rgb(255, 206, 49);
-$brand-danger: rgb(255, 0, 0);
-$danger: rgb(255, 0, 0);
+$brand-warning: rgb(233, 188, 0);
+$warning: $brand-warning;
+//$warning-text should be same as $brand-warning but was darkened to have 4.5:1 contrast on $erp-content-bg
+$warning-text: rgb(112, 90, 0);
+$brand-danger: rgb(226, 0, 13);
+$danger: $brand-danger;
 
 $link-color: $brand-primary;
 $border-color: $erp-button-border;
@@ -47,7 +51,7 @@ $state-info-text: darken($brand-info, 40%);
 $state-info-bg: lighten($brand-info, 40%);
 $state-info-border: $brand-info;
 
-$state-warning-text: darken($brand-warning, 40%);
+$state-warning-text: $erp-table-row-bg-selected;
 $state-warning-bg: $brand-warning;
 $state-warning-border: darken($brand-warning, 40%);
 
@@ -76,6 +80,8 @@ $dropdown-link-active-color: black;
   color: #000;
 }
 
+//</editor-fold>
+
 @import 'base.scss';
 
 // no fancy round corners
@@ -83,6 +89,7 @@ $dropdown-link-active-color: black;
   border-radius: 0 !important;
 }
 
+//<editor-fold desc="color fixes">
 h2,
 h3,
 h4,
@@ -100,23 +107,44 @@ h6,
 }
 
 .bg-primary,
-.bg-secondary,
-.bg-success,
 .bg-info {
   color: white;
+}
+
+.bg-light {
+  color: black;
+}
+
+.text-warning {
+  color: $warning-text !important;
 }
 
 .bg-body {
   color: black;
 }
 
+.card-body {
+  background-color: $erp-content-bg !important;
+}
+
 .card-footer.bg-white {
   background-color: $erp-content-bg !important;
 }
 
+.card.text-bg-primary {
+  background-color: $erp-content-bg !important;
+  color: black !important;
+}
+
+.list-group .list-group-item {
+  background-color: $erp-table-input !important;
+}
+//</editor-fold>
+
+//<editor-fold desc="main heading">
 body {
   background: $erp-background;
-  padding-top: 58px;
+  padding-top: 60px;
 }
 
 h1 {
@@ -129,13 +157,15 @@ h1 {
   padding-right: var(--bs-gutter-x);
   padding-bottom: 2px;
 }
+//</editor-fold>
 
+//<editor-fold desc="navbar">
 .navbar-brand {
   color: white;
 
   //adjust margin & padding to fill whole corner with background
-  padding: calc(var(--bs-navbar-brand-padding-y) + var(--bs-navbar-padding-y) + var(--bs-border-width) * 0.5) 3.5rem
-    calc(var(--bs-navbar-brand-padding-y) + var(--bs-navbar-padding-y) + var(--bs-border-width) * 0.5)
+  padding: calc(var(--bs-navbar-brand-padding-y) + var(--bs-navbar-padding-y) + var(--bs-border-width) * 0.5 + 1px)
+    3.5rem calc(var(--bs-navbar-brand-padding-y) + var(--bs-navbar-padding-y) + var(--bs-border-width) * 0.5 + 1px)
     calc(var(--bs-gutter-x) * 0.5);
   margin: calc((var(--bs-navbar-padding-y) + var(--bs-border-width) * 0.5) * -1) 0
     calc((var(--bs-navbar-padding-y) + var(--bs-border-width) * 0.5) * -1) calc(var(--bs-gutter-x) * -0.5);
@@ -146,28 +176,6 @@ h1 {
   background-size: 25% 100%, 75% 100%;
   background-position: right top, left top;
   background-repeat: no-repeat;
-}
-
-//TODO try white border left and black border right. need to get :first-child / :last-child to work
-.nav-item {
-  border-right: white;
-  border-right-width: 1px;
-  border-right-style: solid;
-}
-
-#content > .container {
-  background: $erp-content-bg;
-  padding-bottom: 1px;
-}
-
-//apply background for "fullscreen" views like /user-shifts
-#content:not(:has(> .container)) {
-  background: $erp-content-bg;
-  padding-bottom: 1px;
-}
-
-.card-body {
-  background-color: $erp-content-bg !important;
 }
 
 .navbar-light {
@@ -182,6 +190,63 @@ h1 {
   color: $link-color;
 }
 
+.nav-link.active {
+  text-decoration: underline;
+}
+
+@media (min-width: 1400px) {
+  .navbar-nav > .nav-item {
+    border-right: dimgray;
+    border-right-width: 1px;
+    border-right-style: solid;
+
+    border-left: white;
+    border-left-width: 1px;
+    border-left-style: solid;
+
+    border-top: transparent;
+    border-top-width: 1px;
+    border-top-style: solid;
+
+    border-bottom: transparent;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+  }
+
+  .navbar-nav > .nav-item:first-child:not(:hover) {
+    border-left-color: transparent !important;
+  }
+
+  .navbar-nav > .nav-item:last-child:not(:hover) {
+    border-right-color: transparent !important;
+  }
+
+  .navbar-nav > .nav-item:hover {
+    border-color: black;
+    border-style: inset;
+  }
+}
+//</editor-fold>
+
+//<editor-fold desc="content background & padding">
+#content {
+  padding-left: calc(var(--bs-gutter-x) * 0.5);
+  padding-right: calc(var(--bs-gutter-x) * 0.5);
+}
+
+#content > .container {
+  background: $erp-content-bg;
+  padding-bottom: calc(var(--bs-gutter-x) * 0.5);
+}
+
+//apply background for "fullscreen" views like /user-shifts
+#content:not(:has(> .container)) {
+  background: $erp-content-bg;
+  padding-bottom: calc(var(--bs-gutter-x) * 0.5);
+}
+//</editor-fold>
+
+//<editor-fold desc="table">
 table {
   border-width: 2px !important;
   border-color: $erp-table-border;
@@ -204,40 +269,119 @@ td,
 th,
 thead {
   //TODO borders don't show between header columns
-  //TODO test thinner borders
   border-left-width: 2px !important;
   border-right-width: 2px !important;
   border-style: solid !important;
   border-color: $erp-table-border !important;
 }
+//</editor-fold>
 
-//todo handle alternate dimensions like xs $ xl
-.col,
-.col-sm-3,
-.col-sm-6,
-.col-md-4 {
+//<editor-fold desc="erp sections and headings">
+//
+// +----------+------+
+// | Heading /       |
+// +--------+        |
+// | Content         |
+// +-----------------+
+
+.col:has(> h4),
+.col-md-2:has(> h4),
+.col-sm-3:has(> h4),
+.col-sm-4:has(> h4),
+.col-md-4:has(> h3),
+.col-xl-4:has(> h4),
+.col-xxl-4:has(> h4),
+.col-lg-5:has(> h4),
+.col-xl-5:has(> h4),
+.col-xs-6:has(> h4),
+.col-sm-6:has(> h2, > h4),
+.col-md-6:has(> h4),
+.col-xl-7:has(> h4),
+.col-12:has(> h4),
+.col-md-12:has(> h4) {
   border-width: 2px !important;
   border-color: $erp-table-border;
   border-style: solid;
   margin: calc(var(--bs-gutter-x) * 0.5);
 }
 
-.col-sm-3 {
-  width: calc(25% - var(--bs-gutter-x));
+.col-12:has(> h4) {
+  width: calc(100% - var(--bs-gutter-x));
 }
 
-.col-sm-6 {
-  width: calc(50% - var(--bs-gutter-x));
+@media (min-width: 576px) {
+  .col-sm-3:has(> h4) {
+    width: calc(25% - var(--bs-gutter-x));
+  }
+
+  .col-sm-4:has(> h4) {
+    width: calc(33.33333333% - var(--bs-gutter-x));
+  }
+
+  .col-sm-6:has(> h2, > h4) {
+    width: calc(50% - var(--bs-gutter-x));
+  }
 }
 
-.col-md-4 {
-  width: calc(33.33333333% - var(--bs-gutter-x));
+@media (min-width: 768px) {
+  .col-md-2:has(> h4) {
+    width: calc(16.66666667% - var(--bs-gutter-x));
+  }
+
+  .col-md-4:has(> h3) {
+    width: calc(33.33333333% - var(--bs-gutter-x));
+  }
+
+  .col-md-6:has(> h4) {
+    width: calc(50% - var(--bs-gutter-x));
+  }
+
+  .col-md-12:has(> h4) {
+    width: calc(100% - var(--bs-gutter-x));
+  }
+}
+
+@media (min-width: 992px) {
+  .col-lg-5:has(> h4) {
+    width: calc(41.66666667% - var(--bs-gutter-x));
+  }
+}
+
+@media (min-width: 1200px) {
+  .col-xl-4:has(> h4) {
+    width: calc(33.33333333% - var(--bs-gutter-x));
+  }
+
+  .col-xl-5:has(> h4) {
+    width: calc(41.66666667% - var(--bs-gutter-x));
+  }
+
+  .col-xl-7:has(> h4) {
+    width: calc(58.33333333% - var(--bs-gutter-x));
+  }
+}
+
+@media (min-width: 1400px) {
+  .col-xxl-4:has(> h4) {
+    width: calc(33.33333333% - var(--bs-gutter-x));
+  }
 }
 
 .col > h4,
+.col-md-2 > h4,
 .col-sm-3 > h4,
+.col-sm-4 > h4,
+.col-md-4 > h3,
+.col-xl-4 > h4,
+.col-xxl-4 > h4,
+.col-lg-5 > h4,
+.col-xs-6 > h4,
 .col-sm-6 > h2,
-.col-md-4 > h3 {
+.col-sm-6 > h4,
+.col-md-6 > h4,
+.col-xl-7 > h4,
+.col-12 > h4,
+.col-md-12 > h4 {
   width: fit-content;
 
   margin-left: calc(var(--bs-gutter-x) * -0.5);
@@ -262,18 +406,32 @@ thead {
   //  transparent;
   //background-repeat: no-repeat;
 
-  //cheap alternative
-  border-bottom: $erp-table-border;
-  border-bottom-width: 2px;
-  border-bottom-style: solid;
-  border-right: $erp-table-border;
-  border-right-width: 2px;
-  border-right-style: solid;
-  padding-bottom: 2px;
-  padding-right: calc(var(--bs-gutter-x) * 0.5);
+  //1. cheap alternative: no fancy angled border on the right side
+  //border-bottom: $erp-table-border;
+  //border-bottom-width: 2px;
+  //border-bottom-style: solid;
+  //border-right: $erp-table-border;
+  //border-right-width: 2px;
+  //border-right-style: solid;
+  //padding-bottom: 2px;
+  //padding-right: calc(var(--bs-gutter-x) * 0.5);
 
-  //TODO idea: use border color as background and cutoff right angle
+  //2. cheap alternative: use border color as background and cutoff right angle
+  //background-color: $erp-table-border;
+  //padding-bottom: 3px;
+  //padding-right: 3rem;
+  //clip-path: polygon(0 0, 100% 0, calc(100% - 50px) 100%, 0 100%);
+
+  //3. cheap alternative: use border color as background and linear-gradient, same as used for the brand logo
+  padding-bottom: 3px;
+  padding-right: 4rem;
+  background-image: linear-gradient(-225deg, $erp-table-border 0 50%, transparent 50% 100%),
+    linear-gradient($erp-table-border 0 100%, $erp-table-border);
+  background-size: 25% 100%, 75% 100%;
+  background-position: right top, left top;
+  background-repeat: no-repeat;
 }
+//</editor-fold>
 
 .shift-calendar {
   border-width: 2px;
@@ -282,6 +440,7 @@ thead {
   padding: 0;
 }
 
+//<editor-fold desc="dropdown">
 .choices__list--dropdown {
   background-color: $dropdown-bg !important;
 }
@@ -290,11 +449,16 @@ thead {
   background-color: $erp-table-row-bg-selected !important;
   color: black !important;
 }
+//</editor-fold>
+
+//fix buttons hugging border on login page
+.col-sm-6.text-center {
+  padding-bottom: calc(var(--bs-gutter-x) * 0.5);
+}
+
+//fix padding on faq page
+.row > form > .col-md-12 {
+  padding: 0 calc(var(--bs-gutter-x) * 0.5) calc(var(--bs-gutter-x) * 0.5) calc(var(--bs-gutter-x) * 0.5);
+}
 
 //TODO dashboard
-
-//TODO shift-calender
-
-//TODO login page
-
-//TODO content padding esp. for fullscreen forms
