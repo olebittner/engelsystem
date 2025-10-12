@@ -274,6 +274,13 @@ thead {
   border-style: solid !important;
   border-color: $erp-table-border !important;
 }
+
+.shift-calendar {
+  border-width: 2px;
+  border-style: solid;
+  border-color: $erp-table-border;
+  padding: 0;
+}
 //</editor-fold>
 
 //<editor-fold desc="erp sections and headings">
@@ -283,6 +290,11 @@ thead {
 // +--------+        |
 // | Content         |
 // +-----------------+
+//
+// since .col elements have usually no borders, no gutters are implemented.
+// but when adding borders the need for gutters becomes apparent.
+// to add gutters without changing html a margin is added. as a result .col elements would not fit into the
+// bootstrap .row anymore. To fix this the width of used .col elements is recalculated.
 
 .col:has(> h4),
 .col-md-2:has(> h4),
@@ -433,13 +445,6 @@ thead {
 }
 //</editor-fold>
 
-.shift-calendar {
-  border-width: 2px;
-  border-style: solid;
-  border-color: $erp-table-border;
-  padding: 0;
-}
-
 //<editor-fold desc="dropdown">
 .choices__list--dropdown {
   background-color: $dropdown-bg !important;
@@ -462,3 +467,5 @@ thead {
 }
 
 //TODO dashboard
+
+//TODO fix mobile right margin of cols
