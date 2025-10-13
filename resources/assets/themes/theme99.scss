@@ -4,9 +4,6 @@
 
 //<editor-fold desc="Colors">
 $erp-logo-bg: rgb(16, 41, 115);
-$erp-col-heading: rgb(90, 206, 255);
-$erp-list-body: rgb(239, 247, 255);
-$erp-key-col: rgb(156, 206, 239);
 $erp-hierarchy-heading: rgb(255, 198, 107);
 $erp-hierarchy-info: rgb(255, 222, 198);
 $erp-background: rgb(148, 178, 198);
@@ -29,7 +26,7 @@ $body-bg: $erp-content-bg;
 $brand-primary: rgb(0, 0, 0);
 $primary: rgb(0, 0, 0);
 $secondary: rgb(139 147 167);
-$brand-success: rgb(77, 166, 25);
+$brand-success: rgb(49, 142, 52);
 $success: $brand-success;
 $brand-info: $erp-logo-bg;
 $info: $erp-logo-bg;
@@ -163,9 +160,12 @@ h1 {
 .navbar-brand {
   color: white;
 
+  $triangle-width: 60px;
+
   //adjust margin & padding to fill whole corner with background
   padding: calc(var(--bs-navbar-brand-padding-y) + var(--bs-navbar-padding-y) + var(--bs-border-width) * 0.5 + 1px)
-    3.5rem calc(var(--bs-navbar-brand-padding-y) + var(--bs-navbar-padding-y) + var(--bs-border-width) * 0.5 + 1px)
+    $triangle-width
+    calc(var(--bs-navbar-brand-padding-y) + var(--bs-navbar-padding-y) + var(--bs-border-width) * 0.5 + 1px)
     calc(var(--bs-gutter-x) * 0.5);
   margin: calc((var(--bs-navbar-padding-y) + var(--bs-border-width) * 0.5) * -1) 0
     calc((var(--bs-navbar-padding-y) + var(--bs-border-width) * 0.5) * -1) calc(var(--bs-gutter-x) * -0.5);
@@ -173,7 +173,7 @@ h1 {
   //create 45degree background transition for logo
   background-image: linear-gradient(-225deg, $erp-logo-bg 0 50%, transparent 50% 100%),
     linear-gradient($erp-logo-bg 0 100%, $erp-logo-bg);
-  background-size: 25% 100%, 75% 100%;
+  background-size: $triangle-width 100%, calc(100% - $triangle-width) 100%;
   background-position: right top, left top;
   background-repeat: no-repeat;
 }
@@ -283,7 +283,7 @@ thead {
 }
 //</editor-fold>
 
-//<editor-fold desc="erp sections and headings">
+//<editor-fold desc="erp sections and headings via .col">
 //
 // +----------+------+
 // | Heading /       |
@@ -396,7 +396,10 @@ thead {
 .col-md-12 > h4 {
   width: fit-content;
 
-  margin-left: calc(var(--bs-gutter-x) * -0.5);
+  margin-top: -1px;
+  padding-top: 1px;
+
+  margin-left: calc(var(--bs-gutter-x) * -0.5 - 1px);
   padding-left: calc(var(--bs-gutter-x) * 0.5);
 
   // experiment: 45degree angle border on the right
@@ -434,14 +437,43 @@ thead {
   //padding-right: 3rem;
   //clip-path: polygon(0 0, 100% 0, calc(100% - 50px) 100%, 0 100%);
 
-  //3. cheap alternative: use border color as background and linear-gradient, same as used for the brand logo
+  //3. cheap alternative: use border color as background and use svg for triangle
+  $triangle-width: 1.3em;
   padding-bottom: 3px;
-  padding-right: 4rem;
-  background-image: linear-gradient(-225deg, $erp-table-border 0 50%, transparent 50% 100%),
+  padding-right: $triangle-width;
+  // editorconfig-checker-disable-next-line svg is longer than max_line_length and linebreaks get removed by prettier
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><polygon points="0,0 200,0 0,200" fill="#{$erp-table-border}"/></svg>'),
     linear-gradient($erp-table-border 0 100%, $erp-table-border);
-  background-size: 25% 100%, 75% 100%;
+  background-size: $triangle-width 100%, calc(100% - $triangle-width) 100%;
   background-position: right top, left top;
   background-repeat: no-repeat;
+
+  //4. cheap alternative:
+  //border-bottom: $erp-table-border;
+  //border-bottom-width: 2px;
+  //border-bottom-style: solid;
+  //
+  //position: relative;
+  //&::after {
+  //  content: '';
+  //  position: absolute;
+  //  top: 0;
+  //  right: calc(-1rem - 2px);
+  //  width: 1px;
+  //  height: 100%;
+  //  background: transparent;
+  //  transform: skew(-45deg);
+  //
+  //  border-right: $erp-table-border;
+  //  border-right-width: 3px;
+  //  border-right-style: solid;
+  //
+  //  border-bottom: $erp-table-border;
+  //  border-bottom-width: 2px;
+  //  border-bottom-style: solid;
+  //
+  //  box-sizing: content-box;
+  //}
 }
 //</editor-fold>
 
@@ -456,6 +488,23 @@ thead {
 }
 //</editor-fold>
 
+//<editor-fold desc="dashboard">
+.col.stats {
+  border-width: 2px !important;
+  border-color: $erp-table-border;
+  border-style: solid;
+  margin: calc(var(--bs-gutter-x) * 0.5);
+
+  text-align: left;
+
+  & > .number {
+    text-align: center;
+  }
+}
+//</editor-fold>
+
+//<editor-fold desc="edge cases & workarounds">
+
 //fix buttons hugging border on login page
 .col-sm-6.text-center {
   padding-bottom: calc(var(--bs-gutter-x) * 0.5);
@@ -466,6 +515,10 @@ thead {
   padding: 0 calc(var(--bs-gutter-x) * 0.5) calc(var(--bs-gutter-x) * 0.5) calc(var(--bs-gutter-x) * 0.5);
 }
 
-//TODO dashboard
-
-//TODO fix mobile right margin of cols
+//fix resized .cols to spill over to the right if no general or small .col class is used
+@media (max-width: 767px) {
+  div[class='col-md-2']:has(> h4) {
+    width: calc(100% - var(--bs-gutter-x));
+  }
+}
+//</editor-fold>
