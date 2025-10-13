@@ -253,7 +253,6 @@ table {
   border-style: solid;
 }
 
-//TODO replicate 3d effect for buttons
 th,
 .header {
   background-image: linear-gradient(
@@ -402,42 +401,6 @@ thead {
   margin-left: calc(var(--bs-gutter-x) * -0.5 - 1px);
   padding-left: calc(var(--bs-gutter-x) * 0.5);
 
-  // experiment: 45degree angle border on the right
-  //padding-right: 3.5rem; /* Matches the angled border width */
-  //padding-bottom: 2px; /* Matches the bottom border height */
-  //background:
-  //  /* Bottom border */
-  //  linear-gradient(to right, $erp-table-border, $erp-table-border) 0 100% / calc(80% + 2px) 2px,
-  //    /* Angled right border at the right edge */
-  //  linear-gradient(135deg,
-  //    transparent 0%,
-  //    transparent calc(50% - 1px),
-  //    $erp-table-border calc(50% - 1px),
-  //    $erp-table-border calc(50% + 1px),
-  //    transparent calc(50% + 1px),
-  //    transparent 100%
-  //  ) 100% 0 / calc(20% - 2px) 100%,
-  //    /* Main background */
-  //  transparent;
-  //background-repeat: no-repeat;
-
-  //1. cheap alternative: no fancy angled border on the right side
-  //border-bottom: $erp-table-border;
-  //border-bottom-width: 2px;
-  //border-bottom-style: solid;
-  //border-right: $erp-table-border;
-  //border-right-width: 2px;
-  //border-right-style: solid;
-  //padding-bottom: 2px;
-  //padding-right: calc(var(--bs-gutter-x) * 0.5);
-
-  //2. cheap alternative: use border color as background and cutoff right angle
-  //background-color: $erp-table-border;
-  //padding-bottom: 3px;
-  //padding-right: 3rem;
-  //clip-path: polygon(0 0, 100% 0, calc(100% - 50px) 100%, 0 100%);
-
-  //3. cheap alternative: use border color as background and use svg for triangle
   $triangle-width: 1.3em;
   padding-bottom: 3px;
   padding-right: $triangle-width;
@@ -447,33 +410,6 @@ thead {
   background-size: $triangle-width 100%, calc(100% - $triangle-width) 100%;
   background-position: right top, left top;
   background-repeat: no-repeat;
-
-  //4. cheap alternative:
-  //border-bottom: $erp-table-border;
-  //border-bottom-width: 2px;
-  //border-bottom-style: solid;
-  //
-  //position: relative;
-  //&::after {
-  //  content: '';
-  //  position: absolute;
-  //  top: 0;
-  //  right: calc(-1rem - 2px);
-  //  width: 1px;
-  //  height: 100%;
-  //  background: transparent;
-  //  transform: skew(-45deg);
-  //
-  //  border-right: $erp-table-border;
-  //  border-right-width: 3px;
-  //  border-right-style: solid;
-  //
-  //  border-bottom: $erp-table-border;
-  //  border-bottom-width: 2px;
-  //  border-bottom-style: solid;
-  //
-  //  box-sizing: content-box;
-  //}
 }
 //</editor-fold>
 
