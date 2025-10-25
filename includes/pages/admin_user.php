@@ -362,7 +362,13 @@ function admin_user()
                     $user_source->state->active = $request->postData('active');
                 }
                 if (auth()->can('user.fa.edit') && config('enable_force_active')) {
-                    $user_source->state->force_active = $request->input('force_active');
+                    if ($user_source->state->force_active != $request->input('force_active')) {
+                        if ($request->input('force_active')) {
+                            $user_source->state->force_active_by = auth()->user()->id;
+                        } else {
+                            $user_source->state->force_active_by = null;
+                        }
+                    }
                 }
                 if (auth()->can('user.ff.edit') && config('enable_force_food')) {
                     $user_source->state->force_food = $request->input('force_food');

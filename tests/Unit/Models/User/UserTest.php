@@ -76,7 +76,7 @@ class UserTest extends ModelTest
                 State::class,
                 'state',
                 [
-                    'force_active' => true,
+                    'force_active_by' => 1,
                     'force_food' => true,
                 ],
             ],
