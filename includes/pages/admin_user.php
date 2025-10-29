@@ -137,6 +137,9 @@ function admin_user()
             $html .= auth()->can('user.fa.edit')
                 ? html_options('force_active', $options, $user_source->state->force_active)
                 : icon_bool($user_source->state->force_active);
+            if ($user_source->state->force_active) {
+                $html .= __('user.by', [User_Nick_render($user_source->state->forceActiveBy)]);
+            }
             $html .= '</td></tr>' . "\n";
         }
 
