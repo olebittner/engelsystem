@@ -17,7 +17,7 @@ class StateFactory extends Factory
     public function definition(): array
     {
         $arrival = $this->faker->optional()->dateTimeThisMonth();
-        $force_active_by = $this->faker->optional(.01)->passthrough(User::factory());
+        $force_active_by = $this->faker->optional(.1)->passthrough(User::factory());
 
         return [
             'user_id'      => User::factory(),
