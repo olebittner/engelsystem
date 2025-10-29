@@ -831,7 +831,8 @@ function User_view_state($admin_user_privilege, $freeloader, $user_source)
                 . '</span>';
 
             if ($user_source->state->force_active && config('enable_force_active')) {
-                $state[] = '<span class="text-success">' . sprintf(__('user.force_active.by'), $user_source->state->forceActiveBy->name) . '</span>';
+                $state[] = '<span class="text-success">' . __('user.force_active') . ' '
+                    .  __('user.by', [User_Nick_render($user_source->state->forceActiveBy)]) . '</span>';
             } elseif ($user_source->state->active) {
                 $state[] = '<span class="text-success">' . __('user.active') . '</span>';
             }
