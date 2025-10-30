@@ -2,6 +2,7 @@
 
 use Carbon\CarbonInterval;
 use Engelsystem\Database\Db;
+use Engelsystem\Helpers\Carbon;
 use Engelsystem\Helpers\Goodie;
 use Engelsystem\Models\AngelType;
 use Engelsystem\Models\Shifts\ShiftEntry;
@@ -189,9 +190,7 @@ function user_controller()
         auth()->resetApiKey($user_source);
     }
 
-    $goodie_score = CarbonInterval::minutes(round(Goodie::userScore($user) * 60))
-        ->cascade()
-        ->format(__('general.duration.format'));
+    $goodie_score = Carbon::formatDuration(CarbonInterval::minutes(round(Goodie::userScore($user_source) * 60)));
     if ($user_source->state->force_active && config('enable_force_active')) {
         $goodie_score = '<span title="' . $goodie_score . '">' . __('user.goodie_score.enough') . '</span>';
     }

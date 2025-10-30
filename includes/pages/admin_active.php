@@ -276,12 +276,8 @@ function admin_active()
                 . '"></span></small>'
             );
         }
-        $userData['work_time'] =  CarbonInterval::seconds($timeSum)
-            ->cascade()
-            ->format(__('general.duration.format'));
-        $userData['score'] =  CarbonInterval::seconds((int) $user['shift_length'])
-            ->cascade()
-            ->format(__('general.duration.format'));
+        $userData['work_time'] = Carbon::formatDuration(CarbonInterval::seconds($timeSum));
+        $userData['score'] =  Carbon::formatDuration(CarbonInterval::seconds((int) $user['shift_length']));
         $userData['active'] = icon_bool($user->state->active);
         $userData['force_active'] = icon_bool($user->state->force_active);
         $userData['force_food'] = icon_bool($user->state->force_food);

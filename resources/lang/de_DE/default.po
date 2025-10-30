@@ -2107,4 +2107,4 @@ msgid "config.edit.success"
 msgstr "Konfiguration erfolgreich angepasst"
 
 msgid "general.duration.format"
-msgstr "%hh %Imin"
+msgstr "%dh %02dmin"
