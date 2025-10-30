@@ -47,6 +47,6 @@ class Carbon extends \Carbon\Carbon
         $hours = floor($interval->totalHours);
         $minutes = $interval->minutes;
 
-        return __('general.duration.format', [$hours, $minutes]);
+        return sprintf(__('general.duration.format'), $hours, $minutes);
     }
 }
