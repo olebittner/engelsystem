@@ -122,15 +122,35 @@ h6,
 
 .card-body {
   background-color: $erp-content-bg !important;
+  color: black !important;
 }
 
 .card-footer.bg-white {
   background-color: $erp-content-bg !important;
+  color: black !important;
 }
 
 .card.text-bg-primary {
   background-color: $erp-content-bg !important;
   color: black !important;
+}
+
+.bg-warning {
+  color: black !important;
+
+  & .text-white {
+    color: black !important;
+  }
+
+  & .btn-danger {
+    color: white !important;
+  }
+}
+
+.bg-secondary {
+  & .btn-secondary {
+    color: black !important;
+  }
 }
 
 .list-group .list-group-item {
