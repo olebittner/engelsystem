@@ -15,6 +15,10 @@ use Engelsystem\ShiftsFilterRenderer;
  */
 function angeltypes_controller()
 {
+    if (!auth()->can('angeltypes.view')) {
+        throw_redirect(url('/'));
+    }
+
     $action = request()->input('action');
 
     return match ($action) {
